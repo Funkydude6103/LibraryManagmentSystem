@@ -20,9 +20,13 @@ public class Library
 
     public void displayAllItems()
     {
+        int count=1;
         for(Item item:itemList)
         {
+            System.out.println("Item "+count+"#");
             item.displayInfo();
+            System.out.println();
+            count++;
         }
     }
     public void loadFromFile()
@@ -133,7 +137,7 @@ public class Library
                             magazine.setPopularityCount(Integer.parseInt(author));
                         }
                         catch (NumberFormatException e) {
-                            System.out.println("Invalid input. Cannot parse to an integer.");
+                            System.out.println(author+"Invalid input. Cannot parse to an integer.");
                         }
                         break;
                     }
@@ -149,7 +153,7 @@ public class Library
                     magazine.setCost(Integer.parseInt(author));
                 }
                 catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Cannot parse to an integer.");
+                    System.out.println(author+"Invalid input. Cannot parse to an integer.");
                 }
                 magazine.setId(countID);
                 itemList.add(magazine);
@@ -169,7 +173,7 @@ public class Library
                 catch (NumberFormatException e) {
                     System.out.println("Invalid input. Cannot parse to an integer.");
                 }
-                String dateString = arr[4]; // Replace with your date string
+                String dateString = arr[4];
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 try {
                     Date date = dateFormat.parse(dateString);

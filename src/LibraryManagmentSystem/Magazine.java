@@ -39,6 +39,7 @@ public class Magazine extends Item
         System.out.println("Magazine ID: "+this.getId());
         System.out.println("Magazine Tittle: "+this.getTittle());
         System.out.println("Magazine Authors: "+this.getAuthorList());
+        System.out.println("Magazine Publisher Company: "+this.getPublisher());
         System.out.println("Magazine Popularity Count: "+this.getPopularityCount());
         System.out.println("Magazine Price: "+this.getCost());
     }
