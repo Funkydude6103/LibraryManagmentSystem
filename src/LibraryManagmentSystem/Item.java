@@ -5,7 +5,7 @@ public class Item implements Configuration
     private String tittle;
     private boolean isBorrowed;
     private int popularityCount;
-    private  static int id;
+    private int id;
     private int cost;
 
     public int getCost()
@@ -40,7 +40,7 @@ public class Item implements Configuration
 
     public void setId(int id)
     {
-        Item.id = id;
+        this.id = id;
     }
 
     public int getPopularityCount()
