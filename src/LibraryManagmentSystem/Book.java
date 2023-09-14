@@ -28,7 +28,12 @@ public class Book extends Item
     @Override
     public void displayInfo()
     {
-        super.displayInfo();
+        System.out.println("Book ID: "+this.getId());
+        System.out.println("Book Tittle: "+this.getTittle());
+        System.out.println("Book Author: "+this.getAuthor());
+        System.out.println("Book Year: "+this.getYear());
+        System.out.println("Book's Popularity Count: "+this.getPopularityCount());
+        System.out.println("Book Price: "+this.getCost());
     }
 
     @Override

@@ -36,6 +36,10 @@ public class Newspaper extends Item
     @Override
     public void displayInfo()
     {
-        super.displayInfo();
+        System.out.println("Newspaper ID: "+this.getId());
+        System.out.println("Newspaper Tittle: "+this.getTittle());
+        System.out.println("Newspaper Publisher: "+this.getPublisher());
+        System.out.println("Newspaper Popularity Count: "+this.getPopularityCount());
+        System.out.println("Newspaper Date: "+this.getDate());
     }
 }

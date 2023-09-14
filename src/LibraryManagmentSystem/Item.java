@@ -5,7 +5,7 @@ public class Item implements Configuration
     private String tittle;
     private boolean isBorrowed;
     private int popularityCount;
-    private static int id;
+    private  static int id;
     private int cost;
 
     public int getCost()
@@ -33,12 +33,12 @@ public class Item implements Configuration
         isBorrowed = borrowed;
     }
 
-    public static int getId()
+    public int getId()
     {
         return id;
     }
 
-    public static void setId(int id)
+    public void setId(int id)
     {
         Item.id = id;
     }
