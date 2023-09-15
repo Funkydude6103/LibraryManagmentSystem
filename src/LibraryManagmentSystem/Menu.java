@@ -1,8 +1,5 @@
 package LibraryManagmentSystem;
-
-import java.io.IOException;
 import java.util.Scanner;
-
 
 public class Menu
 {
@@ -32,8 +29,7 @@ public void showMenu()
 
         switch (choice) {
             case "1":
-                System.out.println("You chose Hot Picks!");
-                // Add your Hot Picks! functionality here
+                library.displayHotPicks();
                 break;
             case "2":
                 System.out.println("You chose Borrow an item");
@@ -51,7 +47,6 @@ public void showMenu()
                 System.out.println("Enter the Item ID for Deletion: ");
                 int id2=scanner2.nextInt();
                 library.deleteItem(id2);
-
                 break;
             case "6":
                 library.displayAllItems();

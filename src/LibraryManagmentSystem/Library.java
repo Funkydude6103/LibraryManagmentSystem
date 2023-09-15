@@ -268,4 +268,28 @@ public class Library
             System.out.println("Item deleted");
         }
     }
+    public void displayHotPicks()
+    {
+        List<Item> i=itemList;
+        i.sort((item1, item2) -> Integer.compare(item2.getPopularityCount(), item1.getPopularityCount()));
+        int count1=1;
+        for(Item item:i)
+        {
+            System.out.println("Item "+count1+"#");
+            item.displayInfo();
+            System.out.println();
+            count1++;
+        }
+        System.out.println("Enter 0 to return to Main Menu");
+        Scanner scanner = new Scanner(System.in);
+        while(true)
+        {
+            String choice=scanner.nextLine();
+            if(choice.equals("0"))
+            {
+                break;
+            }
+        }
+
+    }
 }
