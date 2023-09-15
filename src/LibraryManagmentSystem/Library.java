@@ -5,10 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 public class Library
 {
@@ -46,145 +43,86 @@ public class Library
         int countID=1;
         for(String data:dataFromFile)
         {
+            //Book Case
             if(data.charAt(0)=='1')
             {
                 Book book=new Book();
                 String [] arr=data.split(", ");
-                book.setTittle(arr[1]);
-                book.setAuthor(arr[2]);
-                book.setBorrowed(false);
-                try
+                if(arr.length>=6)
                 {
-                    book.setYear(Integer.parseInt(arr[3]));
-                    book.setPopularityCount(Integer.parseInt(arr[4]));
-                    book.setCost(Integer.parseInt(arr[5]));
+                    book.setTittle(arr[1]);
+                    book.setAuthor(arr[2]);
+                    book.setBorrowed(false);
+                    try {
+                        book.setYear(Integer.parseInt(arr[3]));
+                        book.setPopularityCount(Integer.parseInt(arr[4]));
+                        book.setCost(Integer.parseInt(arr[5]));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Cannot parse to an integer.");
+                    }
+                    book.setId(Item.getNextId());
+                    book.incrementNextId();
+                    itemList.add(book);
                 }
-                catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Cannot parse to an integer.");
-                }
-                book.setId(countID);
-                itemList.add(book);
-                countID++;
+
             }
+            //Magazine Case
             if(data.charAt(0)=='2')
             {
                 Magazine magazine=new Magazine();
                 String [] arr=data.split(", ");
-                magazine.setTittle(arr[1]);
-                magazine.setBorrowed(false);
-                int i=0;
-                for(;i<data.length();i++)
+                if(arr.length>=6)
                 {
-                    if(data.charAt(i)==',')
-                    {
-                        i++;
-                        i++;
-                        break;
+                    magazine.setTittle(arr[1]);
+                    magazine.setBorrowed(false);
+                    List<String> authors = new ArrayList<>(Arrays.asList(arr).subList(2, arr.length - 4));
+                    authors.add(arr[arr.length-4].substring(0,arr[arr.length-4].length()-1));
+                    magazine.setAuthorList(authors);
+                    magazine.setPublisher(arr[arr.length - 3]);
+
+                    try {
+                        magazine.setPopularityCount(Integer.parseInt(arr[arr.length - 2]));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Cannot parse to an integer.");
                     }
-                }
-                for(;i<data.length();i++)
-                {
-                    if(data.charAt(i)==',')
-                    {
-                        i++;
-                        i++;
-                        break;
+                    try {
+                        magazine.setCost(Integer.parseInt(arr[arr.length - 1]));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Cannot parse to an integer.");
                     }
+                    magazine.setId(Item.getNextId());
+                    magazine.incrementNextId();
+                    itemList.add(magazine);
                 }
-                String author="";
-                List<String> authors=new ArrayList<>();
-                for (;i<data.length();i++)
-                {
-                    if(data.charAt(i)==',')
-                    {
-                        i++;
-                        i++;
-                        authors.add(author);
-                        author="";
-                    }
-                    if(data.charAt(i)=='.')
-                    {
-                        authors.add(author);
-                        i++;
-                        i++;
-                        i++;
-                        break;
-                    }
-                    author=author+data.charAt(i);
-                }
-                magazine.setAuthorList(authors);
-                author="";
-                for (;i<data.length();i++)
-                {
-                    if(data.charAt(i)==',')
-                    {
-                       i++;
-                       i++;
-                       magazine.setPublisher(author);
-                       break;
-                    }
-                    author=author+data.charAt(i);
-                }
-                author="";
-                for (;i<data.length();i++)
-                {
-                    if(data.charAt(i)==',')
-                    {
-                        i++;
-                        i++;
-                        try
-                        {
-                            magazine.setPopularityCount(Integer.parseInt(author));
-                        }
-                        catch (NumberFormatException e) {
-                            System.out.println(author+"Invalid input. Cannot parse to an integer.");
-                        }
-                        break;
-                    }
-                    author=author+data.charAt(i);
-                }
-                author="";
-                for (;i<data.length();i++)
-                {
-                    author=author+data.charAt(i);
-                }
-                try
-                {
-                    magazine.setCost(Integer.parseInt(author));
-                }
-                catch (NumberFormatException e) {
-                    System.out.println(author+"Invalid input. Cannot parse to an integer.");
-                }
-                magazine.setId(countID);
-                itemList.add(magazine);
-                countID++;
             }
+            //Newspaper Case
             if(data.charAt(0)=='3')
             {
               Newspaper newspaper=new Newspaper();
                 String [] arr=data.split(", ");
-                newspaper.setTittle(arr[1]);
-                newspaper.setPublisher(arr[2]);
-                newspaper.setBorrowed(false);
-                try
+                if(arr.length>=4)
                 {
-                    newspaper.setPopularityCount(Integer.parseInt(arr[3]));
+                    newspaper.setTittle(arr[1]);
+                    newspaper.setPublisher(arr[2]);
+                    newspaper.setBorrowed(false);
+                    try {
+                        newspaper.setPopularityCount(Integer.parseInt(arr[3]));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Cannot parse to an integer.");
+                    }
+                    String dateString = arr[4];
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    try {
+                        Date date = dateFormat.parse(dateString);
+                        newspaper.setDate(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        System.out.println("Invalid date format.");
+                    }
+                    newspaper.setId(Item.getNextId());
+                    newspaper.incrementNextId();
+                    itemList.add(newspaper);
                 }
-                catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Cannot parse to an integer.");
-                }
-                String dateString = arr[4];
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                try {
-                    Date date = dateFormat.parse(dateString);
-                    newspaper.setDate(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    System.out.println("Invalid date format.");
-                }
-                newspaper.setId(countID);
-                itemList.add(newspaper);
-                countID++;
             }
         }
 

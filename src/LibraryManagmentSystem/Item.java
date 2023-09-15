@@ -2,11 +2,32 @@ package LibraryManagmentSystem;
 
 public class Item implements Configuration
 {
+
     private String tittle;
     private boolean isBorrowed;
+
+    public static int getNextId()
+    {
+        return nextId;
+    }
+
+    public void setNextId(int nextId)
+    {
+        Item.nextId = nextId;
+    }
+    public void incrementNextId()
+    {
+        Item.nextId++;
+    }
+
+
     private int popularityCount;
     private int id;
     private int cost;
+    private static int nextId;
+    static{
+        nextId=1;
+    }
 
     public int getCost()
     {
