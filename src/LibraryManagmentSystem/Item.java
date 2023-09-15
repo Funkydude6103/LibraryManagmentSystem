@@ -1,6 +1,6 @@
 package LibraryManagmentSystem;
 
-public class Item implements Configuration
+public abstract class Item implements Configuration
 {
 
     private String tittle;
@@ -78,14 +78,10 @@ public class Item implements Configuration
     {
         this.cost = cost;
     }
-    @Override
-    public void displayInfo()
-    {
 
-    }
-    @Override
-    public int calculateCost()
-    {
-        return 0;
-    }
+    public abstract void displayInfo();
+
+
+    public abstract int calculateCost();
+    public abstract void edit();
 }

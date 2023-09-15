@@ -1,4 +1,5 @@
 package LibraryManagmentSystem;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Menu
@@ -39,8 +40,19 @@ public void showMenu()
                 library.addItem();
                 break;
             case "4":
-                System.out.println("You chose Edit Item");
-                // Add your Edit Item functionality here
+                Scanner scanner3=new Scanner(System.in);
+                System.out.println("Enter the Item ID you want to edit:");
+                int itemId = scanner3.nextInt();
+                Object o=library.getItemById(itemId);
+                if(!Objects.isNull(o))
+                {
+                    Item item= library.getItemById(itemId);
+                    item.edit();
+                }
+                else
+                {
+                    System.out.println("Item does not Exists");
+                }
                 break;
             case "5":
                 Scanner scanner2=new Scanner(System.in);

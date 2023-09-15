@@ -241,7 +241,6 @@ public class Library
                 try {
                     Date date = dateFormat.parse(userInput);
                     newspaper.setDate(date);
-                    System.out.println("Date entered: " + dateFormat.format(date));
                     itemList.add(newspaper);
                     System.out.println("Item Added!!!!");
                 } catch (ParseException e) {
@@ -292,4 +291,5 @@ public class Library
         }
 
     }
+
 }
