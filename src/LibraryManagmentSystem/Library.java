@@ -145,4 +145,110 @@ public class Library
     {
         return itemList.get(id-1);
     }
+    public void addItem()
+    {
+        while(true)
+        {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter 1 for Book");
+            System.out.println("Enter 2 for Magazine");
+            System.out.println("Enter 3 for Newspaper");
+            System.out.println("Enter 0 to return to Main Menu");
+            System.out.println("Select the Item: ");
+            String choice2 = scanner.nextLine();
+            if(choice2.equals("1"))
+            {
+                Book book=new Book();
+                book.setBorrowed(false);
+                book.setId(Item.getNextId());
+                book.incrementNextId();
+                Scanner scanner2 = new Scanner(System.in);
+                System.out.println("Enter Tittle of Book: ");
+                String input = scanner.nextLine();
+                book.setTittle(input);
+                System.out.println("Enter the Author of Book: ");
+                input = scanner.nextLine();
+                book.setAuthor(input);
+                System.out.println("Enter the Published year of Book: ");
+                int input2=scanner2.nextInt();
+                book.setYear(input2);
+                System.out.println("Enter the Popularity Count of Book: ");
+                input2=scanner2.nextInt();
+                book.setPopularityCount(input2);
+                System.out.println("Enter the Cost of Book: ");
+                input2=scanner2.nextInt();
+                book.setCost(input2);
+                itemList.add(book);
+                System.out.println("Item Added!!!!");
+            }
+            if(choice2.equals("2"))
+            {
+                Magazine magazine=new Magazine();
+                magazine.setBorrowed(false);
+                magazine.setId(Item.getNextId());
+                magazine.incrementNextId();
+                Scanner scanner2 = new Scanner(System.in);
+                System.out.println("Enter Tittle of Magazine: ");
+                String input = scanner.nextLine();
+                magazine.setTittle(input);
+                System.out.println("Enter the Authors of Book and Enter 0 to exit entering Authors: ");
+                List<String> authors=new ArrayList<>();
+                while(true)
+                {
+                    input = scanner.nextLine();
+                    if (input.equals("0"))
+                        break;
+                    authors.add(input);
+                }
+                magazine.setAuthorList(authors);
+                System.out.println("Enter the Publisher of the Magazine: ");
+                input=scanner2.nextLine();
+                magazine.setPublisher(input);
+                System.out.println("Enter the Popularity Count of Magazine: ");
+                int input2=scanner2.nextInt();
+                magazine.setPopularityCount(input2);
+                System.out.println("Enter the Cost of Magazine: ");
+                input2=scanner2.nextInt();
+                magazine.setCost(input2);
+                itemList.add(magazine);
+                System.out.println("Item Added!!!!");
+            }
+            if(choice2.equals("3"))
+            {
+                Newspaper newspaper=new Newspaper();
+                newspaper.setBorrowed(false);
+                newspaper.setId(Item.getNextId());
+                newspaper.incrementNextId();
+                Scanner scanner2 = new Scanner(System.in);
+                System.out.println("Enter Tittle of Newspaper: ");
+                String input = scanner.nextLine();
+                newspaper.setTittle(input);
+                System.out.println("Enter the Publisher of Newspaper: ");
+                input = scanner.nextLine();
+                newspaper.setPublisher(input);
+                System.out.println("Enter the Popularity Count of Newspaper: ");
+                int input2=scanner2.nextInt();
+                newspaper.setPopularityCount(input2);
+                System.out.println("Enter the Date of the Newspaper(dd-MM-yyyy): ");
+                String userInput = scanner.nextLine();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                dateFormat.setLenient(false);
+                try {
+                    Date date = dateFormat.parse(userInput);
+                    newspaper.setDate(date);
+                    System.out.println("Date entered: " + dateFormat.format(date));
+                    itemList.add(newspaper);
+                    System.out.println("Item Added!!!!");
+                } catch (ParseException e) {
+                    System.err.println("Invalid date format. Please enter a date in dd-mm-yyyy format.");
+                }
+            }
+            if(choice2.equals("0"))
+            {
+             break;
+            }
+
+        }
+
+    }
 }

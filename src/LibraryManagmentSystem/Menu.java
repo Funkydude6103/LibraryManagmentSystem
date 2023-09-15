@@ -40,8 +40,7 @@ public void showMenu()
                 // Add your Borrow an item functionality here
                 break;
             case "3":
-                System.out.println("You chose Add Item");
-                // Add your Add Item functionality here
+                library.addItem();
                 break;
             case "4":
                 System.out.println("You chose Edit Item");
