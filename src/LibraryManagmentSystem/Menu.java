@@ -47,8 +47,11 @@ public void showMenu()
                 // Add your Edit Item functionality here
                 break;
             case "5":
-                System.out.println("You chose Delete Item");
-                // Add your Delete Item functionality here
+                Scanner scanner2=new Scanner(System.in);
+                System.out.println("Enter the Item ID for Deletion: ");
+                int id2=scanner2.nextInt();
+                library.deleteItem(id2);
+
                 break;
             case "6":
                 library.displayAllItems();

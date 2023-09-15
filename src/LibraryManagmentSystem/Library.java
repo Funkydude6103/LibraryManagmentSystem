@@ -143,7 +143,12 @@ public class Library
     }
     public Item getItemById(int id)
     {
-        return itemList.get(id-1);
+        for(Item item:itemList)
+        {
+            if(item.getId()==id)
+                return item;
+        }
+        return null;
     }
     public void addItem()
     {
@@ -250,5 +255,17 @@ public class Library
 
         }
 
+    }
+    public void deleteItem(int id)
+    {
+        Object o=getItemById(id);
+        if(Objects.isNull(o))
+        {
+            System.out.println("Item does not Exists");
+        }
+        else {
+            itemList.remove(o);
+            System.out.println("Item deleted");
+        }
     }
 }
