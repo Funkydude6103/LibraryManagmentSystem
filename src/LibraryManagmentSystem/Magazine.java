@@ -30,7 +30,7 @@ public class Magazine extends Item
     @Override
     public int calculateCost()
     {
-        return super.calculateCost();
+        return this.getCost()*this.getPopularityCount();
     }
 
     @Override
@@ -42,5 +42,6 @@ public class Magazine extends Item
         System.out.println("Magazine Publisher Company: "+this.getPublisher());
         System.out.println("Magazine Popularity Count: "+this.getPopularityCount());
         System.out.println("Magazine Price: "+this.getCost());
+        System.out.println("Magazine Total Price: "+this.calculateCost());
     }
 }

@@ -4,5 +4,5 @@
 2, Time Magazine, James Brown, Sarah White., hello, 12, 25
 3, The New York Times, The New York Times Company, 1, 20-09-2023
 3, The Guardian, Guardian Media Group, 1, 20-09-2023
-2, Science Today, John Smith, Mary Johnson, Robert Davis, Emily White., Hello, 20, 40
+2, Science Today, John Smith, Mary Johnson, Robert Davis, Tayyab Anees, Emily White., Hello, 20, 40
 2, Technology Trends, David Brown, Sarah Wilson, Michael Jackson., Hello, 15, 35

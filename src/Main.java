@@ -1,9 +1,11 @@
-import LibraryManagmentSystem.Library;
-public class Main {
-    public static void main(String[] args)
-    {
-        Library library=new Library();
-        library.loadFromFile();
-        library.displayAllItems();
+import LibraryManagmentSystem.Menu;
+
+import java.io.IOException;
+
+public class Main
+{
+    public static void main(String[] args) throws IOException {
+        Menu menu=new Menu();
+        menu.showMenu();
     }
 }

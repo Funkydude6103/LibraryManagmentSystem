@@ -25,6 +25,16 @@ public class Library
             System.out.println();
             count++;
         }
+        System.out.println("Enter 0 to return to Main Menu");
+        Scanner scanner = new Scanner(System.in);
+        while(true)
+        {
+            String choice=scanner.nextLine();
+            if(choice.equals("0"))
+            {
+                break;
+            }
+        }
     }
     public void loadFromFile()
     {
@@ -40,7 +50,6 @@ public class Library
         {
             e.printStackTrace();
         }
-        int countID=1;
         for(String data:dataFromFile)
         {
             //Book Case
@@ -127,5 +136,13 @@ public class Library
         }
 
 
+    }
+    public void displaySingleItem(Item i)
+    {
+       i.displayInfo();
+    }
+    public Item getItemById(int id)
+    {
+        return itemList.get(id-1);
     }
 }

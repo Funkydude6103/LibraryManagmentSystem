@@ -6,6 +6,7 @@ public class Newspaper extends Item
 {
  private String publisher;
  private Date date;
+ private  final int publisherCharges=5;
 
     public String getPublisher()
     {
@@ -30,7 +31,7 @@ public class Newspaper extends Item
     @Override
     public int calculateCost()
     {
-        return super.calculateCost();
+        return 10+publisherCharges;
     }
 
     @Override
@@ -41,5 +42,6 @@ public class Newspaper extends Item
         System.out.println("Newspaper Publisher: "+this.getPublisher());
         System.out.println("Newspaper Popularity Count: "+this.getPopularityCount());
         System.out.println("Newspaper Date: "+this.getDate());
+        System.out.println("Newspaper Total Cost: "+this.calculateCost());
     }
 }

@@ -4,6 +4,7 @@ public class Book extends Item
 {
     private String author;
     private int year;
+    private final int GST=200;
 
     public int getYear()
     {
@@ -34,11 +35,12 @@ public class Book extends Item
         System.out.println("Book Year: "+this.getYear());
         System.out.println("Book's Popularity Count: "+this.getPopularityCount());
         System.out.println("Book Price: "+this.getCost());
+        System.out.println("Book Total Price: "+this.calculateCost());
     }
 
     @Override
     public int calculateCost()
     {
-        return super.calculateCost();
+        return (int) (this.getCost()+(0.20*this.getCost())+GST);
     }
 }
