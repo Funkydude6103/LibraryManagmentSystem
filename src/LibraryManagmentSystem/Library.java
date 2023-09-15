@@ -12,9 +12,10 @@ public class Library
     public Library()
     {
         itemList=new ArrayList<>();
+        borrowerList=new ArrayList<>();
     }
     private List<Item> itemList;
-
+    private List<Borrower> borrowerList;
     public void displayAllItems()
     {
         int count=1;
@@ -290,6 +291,154 @@ public class Library
             }
         }
 
+    }
+    public void displayAvailableItems()
+    {
+        System.out.println("Available Books:");
+        for(Item item:itemList)
+        {
+
+            if(!item.isBorrowed()) {
+                item.displayInfo();
+                System.out.println();
+            }
+        }
+    }
+    public boolean borrowItem()
+    {
+        boolean flag1=true;
+        Scanner scanner3 = new Scanner(System.in);
+        Borrower oldBorrower=null;
+        System.out.println("Enter the Username of the Borrower:");
+        String username=scanner3.nextLine();
+        for (Borrower b:borrowerList)
+        {
+            if(b.getName().equals(username))
+            {
+                oldBorrower=b;
+                flag1=false;
+                break;
+            }
+        }
+        if(flag1)
+        {
+            Borrower newBorrower=new Borrower(username);
+            displayAvailableItems();
+            System.out.println("Enter the Id of the Book to be Borrowed:");
+            int id=scanner3.nextInt();
+            Object o =getItemById(id);
+            if (!Objects.isNull(o)) {
+                Item item =getItemById(id);
+                if(!item.isBorrowed()) {
+                    item.setBorrowed(true);
+                    newBorrower.currentAdder(item);
+                    borrowerList.add(newBorrower);
+                    item.displayInfo();
+                    System.out.println("Borrowed by " + newBorrower.getName());
+                }
+                else {
+                    System.out.println("Item does not Exists");
+                }
+            } else {
+                System.out.println("Item does not Exists");
+            }
+        }
+        else
+        {
+            List<Item> borrowed=oldBorrower.getBorrowed();
+            displayAvailableItems();
+            System.out.println("Enter the Id of the Book to be Borrowed:");
+            int id=scanner3.nextInt();
+            Object o =getItemById(id);
+            if (!Objects.isNull(o)) {
+                Item item =getItemById(id);
+                for(Item i:borrowed)
+                {
+                    if(i.equals(item))
+                    {
+                        System.out.println("Cant Borrow");
+                        return false;
+                    }
+                }
+                if(!item.isBorrowed()) {
+                    item.setBorrowed(true);
+                    oldBorrower.currentAdder(item);
+                    item.displayInfo();
+                    System.out.println("Borrowed by " + oldBorrower.getName());
+                }
+                else
+                {
+                    System.out.println("Can't Borrow this Item");
+                    return false;
+                }
+            } else {
+                System.out.println("Item does not Exists");
+            }
+
+
+        }
+
+        return false;
+    }
+    public void returnItem()
+    {
+        boolean flag1=true;
+        Scanner scanner3 = new Scanner(System.in);
+        Borrower oldBorrower=null;
+        System.out.println("Enter the Username of the Borrower:");
+        String username=scanner3.nextLine();
+        for (Borrower b:borrowerList)
+        {
+            if(b.getName().equals(username))
+            {
+                oldBorrower=b;
+                flag1=false;
+                break;
+            }
+        }
+        if(flag1)
+        {
+            System.out.println("New User");
+        }
+        else
+        {
+            List<Integer> books=new ArrayList<>();
+            List<Item> currentItems=oldBorrower.getCurrent();
+            System.out.println("Current Borrowed Books:");
+            for(Item i:currentItems)
+            {
+                i.displayInfo();
+            }
+            System.out.print("Enter the Id book you want to return: ");
+            int choice = scanner3.nextInt();
+            for(Item i:currentItems)
+            {
+                if(choice==i.getId())
+                {
+                    i.setBorrowed(false);
+                    System.out.println("Item Returned");
+                    oldBorrower.borrowedAdder(i);
+                    oldBorrower.currentRemover(i);
+                    return;
+                }
+            }
+            System.out.println("User doesnt own the book with this Id");
+            return;
+        }
+
+    }
+    public void viewBorrowersList()
+    {
+        System.out.println("Current Borrowers List: ");
+        for (Borrower b:borrowerList)
+        {
+            System.out.println(b.getName()+" is Currently Borrowing the following Items: ");
+            List<Item> items=b.getCurrent();
+            for (Item i:items)
+            {
+                i.displayInfo();
+            }
+        }
     }
 
 }
