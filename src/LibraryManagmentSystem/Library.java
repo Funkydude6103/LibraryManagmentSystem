@@ -270,7 +270,7 @@ public class Library
     }
     public void displayHotPicks()
     {
-        List<Item> i=itemList;
+        List<Item> i=new ArrayList<>(itemList);
         i.sort((item1, item2) -> Integer.compare(item2.getPopularityCount(), item1.getPopularityCount()));
         int count1=1;
         for(Item item:i)
@@ -324,13 +324,14 @@ public class Library
         {
             Borrower newBorrower=new Borrower(username);
             displayAvailableItems();
-            System.out.println("Enter the Id of the Book to be Borrowed:");
+            System.out.println("Enter the Id of the Item to be Borrowed:");
             int id=scanner3.nextInt();
             Object o =getItemById(id);
             if (!Objects.isNull(o)) {
                 Item item =getItemById(id);
                 if(!item.isBorrowed()) {
                     item.setBorrowed(true);
+                    item.setPopularityCount(item.getPopularityCount()+1);
                     newBorrower.currentAdder(item);
                     borrowerList.add(newBorrower);
                     item.displayInfo();
@@ -347,7 +348,7 @@ public class Library
         {
             List<Item> borrowed=oldBorrower.getBorrowed();
             displayAvailableItems();
-            System.out.println("Enter the Id of the Book to be Borrowed:");
+            System.out.println("Enter the Id of the Item to be Borrowed:");
             int id=scanner3.nextInt();
             Object o =getItemById(id);
             if (!Objects.isNull(o)) {
@@ -362,6 +363,7 @@ public class Library
                 }
                 if(!item.isBorrowed()) {
                     item.setBorrowed(true);
+                    item.setPopularityCount(item.getPopularityCount()+1);
                     oldBorrower.currentAdder(item);
                     item.displayInfo();
                     System.out.println("Borrowed by " + oldBorrower.getName());
@@ -404,12 +406,12 @@ public class Library
         {
             List<Integer> books=new ArrayList<>();
             List<Item> currentItems=oldBorrower.getCurrent();
-            System.out.println("Current Borrowed Books:");
+            System.out.println("Current Borrowed Items:");
             for(Item i:currentItems)
             {
                 i.displayInfo();
             }
-            System.out.print("Enter the Id book you want to return: ");
+            System.out.print("Enter the Id Item you want to return: ");
             int choice = scanner3.nextInt();
             for(Item i:currentItems)
             {
@@ -422,7 +424,7 @@ public class Library
                     return;
                 }
             }
-            System.out.println("User doesnt own the book with this Id");
+            System.out.println("User doesnt own the Item with this Id");
             return;
         }
 
